@@ -13,7 +13,7 @@ Current scores:
 * 2024: 31 :star:
 * 2023: 36 :star:
 * 2022: 38 :star:
-* 2021: 30 :star:
+* 2021: 33 :star:
 
 
 
