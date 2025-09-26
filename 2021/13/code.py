@@ -3,7 +3,7 @@ import numpy as np
 dots_coords = []
 folds = []
 reading_coords = True
-with open('input_small.txt') as f:
+with open('input.txt') as f:
 	for li in f.readlines():
 		li = li.removesuffix('\n')
 		if li == '':
@@ -23,20 +23,29 @@ for dot in dots_coords:
 dots_map = np.zeros((max_x+1, max_y+1), dtype=int)
 for dot in dots_coords:
 	dots_map[*dot] = True
+dots_map = dots_map.T
+
 
 for fold in folds:
 	if fold[0] == 'x':
-		left = dots_map[:fold[1], :]
-		right = dots_map[fold[1] + 1:, :]
-		for right_dot in zip(*np.where(right > 0)):
-			left[-1*(right_dot[0] + 1), right_dot[1]] = 1
-		dots_map = left
-	else:
-		up = dots_map[:, :fold[1]]
-		down = dots_map[:, fold[1] + 1:]
-		for down_dot in zip(*np.where(down > 0)):
-			up[down_dot[0], -1*(down_dot[1] + 1)] = 1
-		dots_map = up
+		if dots_map.shape[1] % 2 != 1 or fold[1] != dots_map.shape[1]//2:
+			dots_map = np.hstack((dots_map, np.zeros((dots_map.shape[0], fold[1]*2+1 - dots_map.shape[1]))))
 
-print(dots_map)
-print(len(np.where(dots_map > 0)[0]))
+		if dots_map.shape[1] % 2 != 1:
+			raise Exception('x is not odd')
+		if fold[1] != dots_map.shape[1] // 2:
+			raise Exception('fold in x is not in the center')
+
+		dots_map = np.logical_or(dots_map[:, :dots_map.shape[1] // 2], dots_map[:, :dots_map.shape[1] // 2:-1])
+
+	else:
+		if dots_map.shape[0] % 2 != 1 or fold[1] != dots_map.shape[0]//2:
+			dots_map = np.vstack((dots_map, np.zeros((fold[1]*2+1 - dots_map.shape[0], dots_map.shape[1]))))
+
+		if dots_map.shape[0] % 2 != 1:
+			raise Exception('y is not odd')
+		if fold[1] != dots_map.shape[0]//2:
+			raise Exception('fold in y is not in the center')
+
+		dots_map = np.logical_or(dots_map[:dots_map.shape[0] // 2, :], dots_map[:dots_map.shape[0] // 2:-1, :])
+print(np.sum(dots_map))
