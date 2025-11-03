@@ -1,2 +1,2 @@
 # Ignore all txt files as those contain the puzzle inputs
-.txt
+*.txt
