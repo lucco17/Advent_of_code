@@ -1,9 +1,10 @@
 import os
 
 year = 2021
+number_of_days = 12
 
 os.makedirs(str(year))
-for i in range(1, 26):
+for i in range(1, number_of_days+1):
     day_path = rf'{str(year)}\{str(i)}'
     os.makedirs(day_path)
     open(rf'{day_path}\input.txt', 'a').close()
