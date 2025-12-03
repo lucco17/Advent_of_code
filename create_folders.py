@@ -1,6 +1,6 @@
 import os
 
-year = 2021
+year = 2025
 number_of_days = 12
 
 os.makedirs(str(year))
