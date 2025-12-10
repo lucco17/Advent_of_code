@@ -6,6 +6,19 @@ def get_numbers(data, start_i, end_i):
 		nums.append(int(data[i][start_i:end_i]))
 	return nums
 
+def get_numbers_2(data, start_i, end_i):
+	nums = []
+	for i in range(start_i, end_i - 1):
+		curr_num = ''
+		for j in range(len(data) - 1):
+			if i >= len(data[j]):
+				curr_num += ' '
+			else:
+				curr_num += data[j][i]
+		nums.append(int(curr_num))
+	return nums
+
+
 data = []
 with open('input.txt') as f:
 	for li in f.readlines():
@@ -15,7 +28,8 @@ s = 0
 start = 0
 for i, ch in enumerate(data[-1]):
 	if ch in ['+', '*'] and i != 0:
-		nums = get_numbers(data, start, i)
+		# nums = get_numbers(data, start, i)
+		nums = get_numbers_2(data, start, i)
 		if data[-1][start] == '+':
 			s += sum(nums)
 		else:
@@ -24,7 +38,8 @@ for i, ch in enumerate(data[-1]):
 max_len = 0
 for li in data:
 	max_len = max(max_len, len(li))
-nums = get_numbers(data, start, max_len)
+# nums = get_numbers(data, start, max_len)
+nums = get_numbers_2(data, start, max_len + 1)
 if data[-1][start] == '+':
 	s += sum(nums)
 else:

@@ -10,7 +10,7 @@ These files include my solution for the puzzles I have solved or attempted.
 
 Current scores:
 
-* 2025: 10 :star: / 24 :star:
+* 2025: 14 :star: / 24 :star:
 * 2024: 31 :star: / 50 :star:
 * 2023: 36 :star: / 50 :star:
 * 2022: 38 :star: / 50 :star:

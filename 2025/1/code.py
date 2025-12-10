@@ -18,13 +18,12 @@ with open('input.txt') as f:
 dial = 50
 s = 0
 for direc in directions:
-	if direc[0] == 'L':
-		dial -= direc[1]
-		print(dial)
-		s += abs(dial//100)
-	else:
-		dial += direc[1]
-		print(dial)
-		s += dial//100
-	dial %= 100
+	for i in range(direc[1]):
+		if direc[0] == 'L':
+			dial -= 1
+		else:
+			dial += 1
+		dial %= 100
+		if dial == 0:
+			s += 1
 print(s)
